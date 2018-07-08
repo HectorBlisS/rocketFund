@@ -49,6 +49,16 @@ router.get('/:id', (req,res,next)=>{
 });
 
 //user crud
+router.get('/self', verifyToken, (req,res,next)=>{
+    const query = {owner:req.user._id};
+    Project.find(query)
+    .then(projects=>{
+        if(projects.length < 1) return res.status(404).send(projects);
+        res.status(200).send(projects);
+    })
+    .catch(e=>next(e));
+})
+
 router.get('/:id', (req,res,next)=>{
     Project.findById(req.params.id)
     .then(item=>{
