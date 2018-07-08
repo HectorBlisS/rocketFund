@@ -31,6 +31,7 @@ router.get('/', (req,res,next)=>{
     if(req.query.title) query.title = {$regex:req.query.title, $options:'i'};
 
     Project.find(query).limit(20).skip(skip)
+    .populate('owner')
     .then(items=>{
         res.json({items,skip})
     })
