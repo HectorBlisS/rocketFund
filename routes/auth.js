@@ -17,7 +17,7 @@ router.post('/login',
     (req,res,next)=>{
         passport.authenticate('local', (err, user, info)=>{
             if(err) return res.status(500).send(err);
-            if(!user) return res.send(info);
+            if(!user) return res.status(500).send(info);
             res.json({user:user,access_token:genToken(user)});
         })(req, res, next);
 });
