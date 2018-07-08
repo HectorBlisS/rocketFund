@@ -5,6 +5,19 @@ const genToken = require('../helpers/jwt').genToken;
 const verifyToken = require('../helpers/jwt').verifyToken;
 
 
+//fullUser
+router.get('/self', verifyToken, (req,res,next)=>{
+    User.findById(req.user._id)
+    .populate('projects')
+    .populate('followingProjects')
+    .populate('contacts')
+    .then(user=>{
+        if(!user) return res.status(404).send(user);
+        res.status(200).send(user);
+    })
+    .catch(e=>next(e));
+})
+
 router.post('/signup', (req,res,next)=>{
     User.register(req.body, req.body.password)
     .then(user=>{

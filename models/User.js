@@ -33,7 +33,13 @@ const userSchema = new Schema({
     canPublish:{
         type: Boolean,
         default: false
-    }
+    },
+    projects:[
+        {
+            type:Schema.Types.ObjectId,
+            ref: 'Project'
+        }
+    ]
 },{
     timestamps:{
         createdAt:'created_at',
