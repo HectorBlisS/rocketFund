@@ -46,6 +46,12 @@ const projectSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Reward'
         }
+    ],
+    followers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     ]
 },
 {
