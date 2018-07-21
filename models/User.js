@@ -53,12 +53,7 @@ const userSchema = new Schema({
     age:Number,
     tel:String,
     address:{
-        street: String,
-        number: String,
-        town: String,
-        cp: String,
-        city: String,
-        state: String
+        type: String
     },
     occupation: String,
     anotherMail: String
