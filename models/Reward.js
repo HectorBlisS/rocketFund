@@ -52,11 +52,13 @@ const rewardSchema = new Schema({
 // }
 
 rewardSchema.pre('remove', function(next) {
-    Project.update(
-        { rewards : this._id}, 
-        { $pull: { rewards: this._id } },
-        { multi: true })  //if reference exists in multiple documents 
-    .exec();
+    // Project.update(
+    //     { rewards : this._id}, 
+    //     { $pull: { rewards: this._id } },
+    //     { multi: true })  //if reference exists in multiple documents 
+    // .exec();
+    Project.findByIdAndUpdate(this.project,{$pull:{ rewards:this._id}}).exec();
+    //Submission.remove({client_id: this._id}).exec();
     next();
 });
 
