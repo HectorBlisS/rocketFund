@@ -4,6 +4,13 @@ const passport = require('passport');
 const genToken = require('../helpers/jwt').genToken;
 const verifyToken = require('../helpers/jwt').verifyToken;
 
+//update user
+router.post('/self', verifyToken, (req,res,next)=>{
+    if(req.user._id !== req.body._id) return res.status(403).res({message:"No tienes permiso"})
+    User.findByIdAndUpdate(req.user._id, req.body)
+    .then(user=>res.status(200).json(user))
+    .catch(err=>next())
+})
 
 //fullUser
 router.get('/self', verifyToken, (req,res,next)=>{
