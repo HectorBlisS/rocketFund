@@ -2,6 +2,7 @@ const Schema = require('mongoose').Schema;
 
 const projectSchema = new Schema({
     photo:String,
+    video: String,
     owner:{
         type: Schema.Types.ObjectId,
         ref: 'User',
