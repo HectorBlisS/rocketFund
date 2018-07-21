@@ -7,7 +7,7 @@ const verifyToken = require('../helpers/jwt').verifyToken;
 //update user
 router.post('/self', verifyToken, (req,res,next)=>{
     console.log(req.body._id, req.user._id)
-    if(req.user._id !== req.body._id) return res.status(403).json({message:"No tienes permiso"})
+    if(req.user._id != req.body._id) return res.status(403).json({message:"No tienes permiso"})
     User.findByIdAndUpdate(req.user._id, req.body)
     .then(user=>res.status(200).json(user))
     .catch(err=>next())
