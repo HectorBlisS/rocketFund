@@ -39,7 +39,23 @@ const userSchema = new Schema({
             type:Schema.Types.ObjectId,
             ref: 'Project'
         }
-    ]
+    ],
+    //profile
+    genre: String,
+    cover:String,
+    photoURL:String,
+    age:Number,
+    tel:String,
+    address:{
+        street: String,
+        number: String,
+        town: String,
+        cp: String,
+        city: String,
+        state: String
+    },
+    occupation: String,
+    anotherMail: String
 },{
     timestamps:{
         createdAt:'created_at',
