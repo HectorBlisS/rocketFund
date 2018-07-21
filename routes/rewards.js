@@ -9,7 +9,7 @@ const canPublish = (req,res,next)=>{
 }
 
 const canEdit = (req,res,next)=>{
-    Project.findOne({_id:req.body.project, owner:req.user._id})
+    Project.findOne({_id:req.params.id, owner:req.user._id})
     .then(item=>{
         if(item) return next();
         return res.status(404).send({message:'No se encotró ninguna recompens que coincida'})
@@ -72,7 +72,7 @@ router.post('/', verifyToken, canPublish, (req,res,next)=>{
 router.patch('/:id', verifyToken, canEdit, (req,res,next)=>{
     Reward.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .then(item=>{
-        res.status(201).json(item)
+        res.status(202).json(item)
     })
     .catch(e=>next(e));
 })
