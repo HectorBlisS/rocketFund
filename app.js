@@ -60,6 +60,9 @@ const index = require('./routes/index');
 const auth = require('./routes/auth');
 const projects = require('./routes/projects');
 const rewards = require('./routes/rewards');
+const categories = require('./routes/categories');
+
+app.use('/categories', categories);
 app.use('/', index);
 app.use('/', auth);
 app.use('/projects', projects);
