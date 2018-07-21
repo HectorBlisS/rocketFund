@@ -77,6 +77,14 @@ router.patch('/:id', verifyToken, canEdit, (req,res,next)=>{
     .catch(e=>next(e));
 })
 
+router.delete('/:id', verifyToken, canEdit, (req,res,next)=>{
+    Reward.findByIdAndRemove(req.params.id)
+    .then(item=>{
+        res.status(204).json(item)
+    })
+    .catch(e=>next(e));
+})
+
 //admin crud
 
 module.exports = router;
