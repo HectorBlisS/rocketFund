@@ -80,7 +80,7 @@ router.patch('/:id', verifyToken, canEdit, (req,res,next)=>{
 router.delete('/:id', verifyToken, canEdit, (req,res,next)=>{
     Reward.findByIdAndRemove(req.params.id)
     .then(item=>{
-        res.status(204).json(item)
+        res.status(200).json(item)
     })
     .catch(e=>next(e));
 })

@@ -2,6 +2,7 @@ const Schema = require('mongoose').Schema;
 
 const rewardSchema = new Schema({
     date: Date,
+    quantity:Number,
     owner:{
         type: Schema.Types.ObjectId,
         ref: 'User',
