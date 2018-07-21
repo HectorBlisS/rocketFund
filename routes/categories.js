@@ -7,7 +7,7 @@ router.post('/', (req,res, next)=>{
     .then(item=>{
         res.status(200).send(item)
     })
-    .catch(next())
+    .catch(e=>next(e))
 })
 
 router.get('/', (req,res)=>{
@@ -15,7 +15,7 @@ router.get('/', (req,res)=>{
     .then(items=>{
         res.status(200).send(items)
     })
-    .catch(next())
+    .catch(e=>next(e))
 })
 
 
