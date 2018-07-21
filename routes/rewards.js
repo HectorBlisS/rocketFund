@@ -9,7 +9,7 @@ const canPublish = (req,res,next)=>{
 }
 
 const canEdit = (req,res,next)=>{
-    Project.findOne({_id:req.params.id, owner:req.user._id})
+    Reward.findOne({_id:req.params.id, owner:req.user._id})
     .then(item=>{
         if(item) return next();
         return res.status(404).send({message:'No se encotró ninguna recompens que coincida'})
