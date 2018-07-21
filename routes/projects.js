@@ -53,7 +53,7 @@ router.get('/:id', (req,res,next)=>{
 router.get('/own/:id', verifyToken, (req,res,next)=>{
     Project.findOne({_id:req.params.id,owner:req.user._id})
     .populate('rewards')
-    .populate('funds')
+    // .populate('funds')
     .then(item=>{
         if(!item) return res.status(403).json({message:"you don't have access"})
         res.json(item)
