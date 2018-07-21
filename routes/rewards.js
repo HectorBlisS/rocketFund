@@ -58,7 +58,8 @@ router.get('/:id', (req,res,next)=>{
 });
 
 router.post('/', verifyToken, canPublish, (req,res,next)=>{
-    let newReward = {};
+    let newReward = {}
+    req.body.owner = req.user._id
     Reward.create(req.body)
     .then(item=>{
         newReward = item;
