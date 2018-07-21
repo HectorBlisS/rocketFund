@@ -56,7 +56,7 @@ const userSchema = new Schema({
         type: String
     },
     occupation: String,
-    anotherMail: String
+    email2: String
 },{
     timestamps:{
         createdAt:'created_at',

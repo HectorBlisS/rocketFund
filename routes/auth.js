@@ -9,6 +9,14 @@ router.post('/self', verifyToken, (req,res,next)=>{
     console.log(req.body._id, req.user._id)
     if(req.user._id != req.body._id) return res.status(403).json({message:"No tienes permiso"})
     User.findByIdAndUpdate(req.user._id, req.body, {new:true})
+    .populate({
+        path: 'projects',
+        populate:{
+            path: 'followers'
+        }
+    })
+    .populate('followingProjects')
+    .populate('contacts')
     .then(user=>res.status(200).json(user))
     .catch(err=>next())
 })
