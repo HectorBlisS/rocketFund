@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
+    donations:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Fund'
+        }
+    ],
     username:{
         type:String,
         unique:true,
