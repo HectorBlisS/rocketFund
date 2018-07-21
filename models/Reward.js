@@ -20,9 +20,10 @@ const rewardSchema = new Schema({
         type: Boolean,
         default: true
     },
-    price: Number,
+    amount: Number,
     available: Number,
     sold: Number,
+    photo:String,
     funders:[
         {
             type: Schema.Types.ObjectId,

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Reward = require('../models/Reward');
+const Project = require('../models/Project');
 const verifyToken = require('../helpers/jwt').verifyToken;
 
 const canPublish = (req,res,next)=>{
@@ -8,7 +9,7 @@ const canPublish = (req,res,next)=>{
 }
 
 const canEdit = (req,res,next)=>{
-    Reward.findOne({_id:req.params.id, owner:req.user._id})
+    Project.findOne({_id:req.body.project, owner:req.user._id})
     .then(item=>{
         if(item) return next();
         return res.status(404).send({message:'No se encotró ninguna recompens que coincida'})
@@ -57,10 +58,13 @@ router.get('/:id', (req,res,next)=>{
 });
 
 router.post('/', verifyToken, canPublish, (req,res,next)=>{
+    let newReward = {};
     Reward.create(req.body)
     .then(item=>{
-        res.status(201).json(item)
+        newReward = item;
+        return Project.findByIdAndUpdate(item.project, {$push:{rewards:item._id}}, {new:true})
     })
+    .then(project=>res.status(201).json(newReward))
     .catch(e=>next(e));
 });
 
