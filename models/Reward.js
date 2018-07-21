@@ -1,4 +1,5 @@
 const Schema = require('mongoose').Schema;
+const Project = require('./Project');
 
 const rewardSchema = new Schema({
     date: Date,
@@ -49,5 +50,14 @@ const rewardSchema = new Schema({
 // projectSchema.virtual = ()=>{
 
 // }
+
+rewardSchema.pre('remove', function(next) {
+    Project.update(
+        { rewards : this._id}, 
+        { $pull: { rewards: this._id } },
+        { multi: true })  //if reference exists in multiple documents 
+    .exec();
+    next();
+});
 
 module.exports = require('mongoose').model('Reward', rewardSchema);
