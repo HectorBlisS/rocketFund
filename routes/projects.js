@@ -50,7 +50,7 @@ router.get('/:id', (req,res,next)=>{
 
 //user crud
 
-router.get('own/:id', verifyToken, (req,res,next)=>{
+router.get('/own/:id', verifyToken, (req,res,next)=>{
     Project.findOne({_id:req.params.id,owner:req.user._id})
     .then(item=>{
         if(!item) return res.status(403).json({message:"you don't have access"})
@@ -67,7 +67,7 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
     .catch(e=>next(e));
 });
 
-router.patch('own/:id', verifyToken, canEdit, (req,res,next)=>{
+router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .then(item=>{
         res.status(201).json(item)
