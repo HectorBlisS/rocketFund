@@ -33,6 +33,12 @@ router.post('/login',
             if(!user) return res.status(403).send(info);
             //res.json({user:user,access_token:genToken(user)});
             User.findById(user._id)
+            .populate({
+                path: 'projects',
+                populate:{
+                    path: 'followers'
+                }
+            })
             .then(u=>res.json({user:u,access_token:genToken(u)}))
         })(req, res, next);
 });
