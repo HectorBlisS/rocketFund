@@ -70,7 +70,7 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
 router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .then(item=>{
-        res.status(201).json(item)
+        res.status(202).json(item)
     })
     .catch(e=>next(e));
 })

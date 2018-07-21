@@ -11,6 +11,7 @@ const projectSchema = new Schema({
         type: String,
         required: true
     },
+    summary:String,
     body: String,
     category: {
         type: String,
