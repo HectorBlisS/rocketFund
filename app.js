@@ -61,10 +61,12 @@ const auth = require('./routes/auth');
 const projects = require('./routes/projects');
 const rewards = require('./routes/rewards');
 const categories = require('./routes/categories');
+const users = require('./routes/users');
 
 app.use('/categories', categories);
 app.use('/rewards', rewards);
 app.use('/projects', projects);
+app.use('/users', users);
 app.use('/', auth);
 app.use('/', index);
 
