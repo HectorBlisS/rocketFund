@@ -90,9 +90,7 @@ router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
 
 router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    .populate({
-        path: 'rewards'
-    })
+    .populate('rewards')
     .populate('owner')
     .then(project=>res.status(200).json(project))
     .catch(err=>next(err))
@@ -101,6 +99,7 @@ router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
 router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
     Project.find()
     .then(items=>{
+        console.log("si?????", items)
         res.status(200).send(items)
     })
     .catch(e=>next(e))
