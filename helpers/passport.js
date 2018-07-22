@@ -14,23 +14,23 @@ passport.use(new FacebookTokenStrategy({
     clientID: "1865855136964814",
     clientSecret: "15500619d33f0d0900d44b95a01faced"
   }, function(accessToken, refreshToken, profile, done) {
-    return User.findOne({facebookId: profile.id})
-    .then(user=>{
+    return User.findOne({facebookId: profile.id}, (err, user)=>{
+        if(err) return done(err)
         if(user) return done(null, user)
-        console.log(profile)
-        const u = {
+        const u = new User({
             facebookId:profile.id,
             username: profile.displayName,
             email: profile.emails[0].value,
             photoURL: profile.photos[0].value
-        }
-        return User.create(u)
-    })
-    .then(user=>{
-        return done(null, user)
-    })
-    //.catch(e=>done(e, null))
-  }
-));
+        })
+        u.save(err=>{
+            if(err) return done(err)
+            done(null, u)
+        })
+        
+    }) //find
+
+  } //cb
+)); //strategy
 
 module.exports = passport;
