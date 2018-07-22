@@ -61,22 +61,15 @@ router.post('/login',
 
 //facebook login
 router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (req,res, next)=>{
-    console.log(req.user)
-    // User.findById(req.user._id)
-    //         .populate({
-    //             path: 'projects',
-    //             populate:{
-    //                 path: 'followers'
-    //             }
-    //         })
+    console.log('a vel', req.user._id)
+    User.findById(req.user._id)
+            .populate({
+                path: 'projects',
+                populate:{
+                    path: 'followers'
+                }
+            })
 
-    req.user
-    .populate({
-            path: 'projects',
-            populate:{
-                path: 'followers'
-            }
-        })
 
     .then(u=>res.json({user:u,access_token:genToken(u)}))
     .catch(e=>next(e))
