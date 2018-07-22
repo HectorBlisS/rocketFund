@@ -60,7 +60,7 @@ router.post('/login',
 });
 
 //facebook login
-router('/auth/facebook/token', passport.authenticate('facebook-token'), (req,res)=>{
+router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (req,res)=>{
     User.findById(req.user._id)
             .populate({
                 path: 'projects',
