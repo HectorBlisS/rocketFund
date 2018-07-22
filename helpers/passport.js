@@ -16,7 +16,6 @@ passport.use(new FacebookTokenStrategy({
   }, function(accessToken, refreshToken, profile, done) {
     return User.findOne({facebookId: profile.id})
     .then(user=>{
-        console.log("lo encontré", user)
         if(user) return done(null, user)
         console.log(profile)
         const u = {
