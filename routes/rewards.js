@@ -87,6 +87,7 @@ router.delete('/:id', verifyToken, canEdit, (req,res,next)=>{
         
     })
     .then(project=>{
+        console.log(project)
         res.status(200).json(deleted)
     })
     .catch(e=>next(e));
