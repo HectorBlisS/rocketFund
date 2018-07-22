@@ -59,6 +59,20 @@ router.post('/login',
         })(req, res, next);
 });
 
+//facebook login
+router('/auth/facebook/token', passport.authenticate('facebook-token'), (req,res)=>{
+    User.findById(req.user._id)
+            .populate({
+                path: 'projects',
+                populate:{
+                    path: 'followers'
+                }
+            })
+            .then(u=>res.json({user:u,access_token:genToken(u)}))
+})
+
+
+
 router.get('/private', verifyToken, (req,res)=>{
     //req.user is available
     res.send('tienes permiso ' + req.user.username)
