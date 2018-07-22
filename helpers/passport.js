@@ -29,7 +29,7 @@ passport.use(new FacebookTokenStrategy({
     .then(user=>{
         return done(null, user)
     })
-    .catch(e=>done(e, null))
+    //.catch(e=>done(e, null))
   }
 ));
 
