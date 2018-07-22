@@ -2,6 +2,11 @@ const router = require('express').Router();
 const Project = require('../models/Project');
 const verifyToken = require('../helpers/jwt').verifyToken;
 
+const checkIfAdmin = (req,res,next) => {
+    if(req.user.role !== "ADMIN") return res.status(403).send({message:"No tienes permiso"})
+    next()
+}
+
 const canPublish = (req,res,next)=>{
     if(req.user.role === 'OWNER' && req.user.canPublish) return next();
     res.status(403).json({status:'Forbidden', message:'No tienes permiso para publicar'});
@@ -18,6 +23,7 @@ const canEdit = (req,res,next)=>{
     });
     
 }
+
 
 //public
 router.get('/', (req,res,next)=>{
@@ -78,5 +84,28 @@ router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
 })
 
 //admin crud
+
+
+//admin
+
+router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
+    Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    .populate({
+        path: 'rewards'
+    })
+    .populate('owner')
+    .then(project=>res.status(200).json(project))
+    .catch(err=>next(err))
+})
+
+router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
+    Project.find()
+    .then(items=>{
+        res.status(200).send(items)
+    })
+    .catch(e=>next(e))
+})
+
+
 
 module.exports = router;
