@@ -88,6 +88,16 @@ router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
 
 //admin
 
+router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
+    //const query = {status:"PUBLISHED", active:true};
+    Project.find()
+    .then(items=>{
+        console.log("si?????", items)
+        res.status(200).send(items)
+    })
+    .catch(e=>next(e))
+})
+
 router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .populate('rewards')
@@ -96,15 +106,7 @@ router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
     .catch(err=>next(err))
 })
 
-router.get('/admin', (req,res, next)=>{
-    const query = {status:"PUBLISHED", active:true};
-    Project.find(query)
-    .then(items=>{
-        console.log("si?????", items)
-        res.status(200).send(items)
-    })
-    .catch(e=>next(e))
-})
+
 
 
 
