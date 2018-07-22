@@ -55,7 +55,11 @@ const projectSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
+    promoted: {
+        type: Boolean,
+        default: false
+    }
 },
 {
     timestamps:{
