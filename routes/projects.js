@@ -97,7 +97,8 @@ router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
 })
 
 router.get('/admin', (req,res, next)=>{
-    Project.find()
+    const query = {status:"PUBLISHED", active:true};
+    Project.find(query)
     .then(items=>{
         console.log("si?????", items)
         res.status(200).send(items)
