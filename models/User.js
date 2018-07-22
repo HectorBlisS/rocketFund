@@ -57,7 +57,11 @@ const userSchema = new Schema({
         type: String
     },
     occupation: String,
-    email2: String
+    email2: String,
+    facebookId:{
+        type: String,
+        unique:true
+    }
 },{
     timestamps:{
         createdAt:'created_at',
