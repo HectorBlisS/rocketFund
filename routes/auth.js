@@ -73,7 +73,7 @@ router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (re
 
     .then(u=>{
         console.log('llego? ', u)
-        res.json({user:u,access_token:genToken(u)})
+        res.status(200).send({user:u, access_token:genToken(u)})
     })
     .catch(e=>next(e))
 })
