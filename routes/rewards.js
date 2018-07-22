@@ -79,7 +79,7 @@ router.patch('/:id', verifyToken, canEdit, (req,res,next)=>{
 
 //how to make the cascade effect?
 router.delete('/:id', verifyToken, canEdit, (req,res,next)=>{
-    Reward.findByIdAndRemove(req.params.id)
+    Reward.remove({_id:req.params.id})
     .then(item=>{
         res.status(200).json(item)
     })
