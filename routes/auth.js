@@ -60,7 +60,7 @@ router.post('/login',
 });
 
 //facebook login
-router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (req,res, next)=>{
+router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (req, res, next)=>{
     console.log('a vel', req.user._id)
     User.findById(req.user._id)
             .populate({
@@ -71,7 +71,10 @@ router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (re
             })
 
 
-    .then(u=>res.json({user:u,access_token:genToken(u)}))
+    .then(u=>{
+        console.log('llego? ', u)
+        res.json({user:u,access_token:genToken(u)})
+    })
     .catch(e=>next(e))
 })
 
