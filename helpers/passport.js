@@ -19,8 +19,15 @@ passport.use(new FacebookTokenStrategy({
         if(user) return done(null, user)
         console.log(profile)
         const u = {
-            facebookId:profile.id
+            facebookId:profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            photoURL: profile.photos[0].value
         }
+        return User.create(u)
+    })
+    .then(user=>{
+        done(null, user)
     })
     .catch(e=>done(e, null))
   }
