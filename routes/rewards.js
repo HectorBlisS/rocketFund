@@ -80,7 +80,7 @@ router.patch('/:id', verifyToken, canEdit, (req,res,next)=>{
 //how to make the cascade effect?
 router.delete('/:id', verifyToken, canEdit, (req,res,next)=>{
     let deleted;
-    Reward.remove({_id:req.params.id})
+    Reward.findByIdAndRemove(req.params.id)
     .then(item=>{
         deleted = item
         return Project.findByIdAndUpdate(item.project,{$pull:{ rewards:item._id}}, {new:true})
