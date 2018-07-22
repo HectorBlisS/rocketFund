@@ -98,13 +98,13 @@ router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
     .catch(e=>next(e))
 })
 
-router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
-    Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
-    .populate('rewards')
-    .populate('owner')
-    .then(project=>res.status(200).json(project))
-    .catch(err=>next(err))
-})
+// router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
+//     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
+//     .populate('rewards')
+//     .populate('owner')
+//     .then(project=>res.status(200).json(project))
+//     .catch(err=>next(err))
+// })
 
 
 
