@@ -61,6 +61,7 @@ router.post('/login',
 
 //facebook login
 router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (req, res, next)=>{
+    if(!req.user.is_active) return res.status(403).send({message:"Tu cuenta ha sido desactivada"})
     User.findById(req.user._id)
     .populate({
         path: 'projects',

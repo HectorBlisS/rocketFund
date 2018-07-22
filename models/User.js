@@ -4,6 +4,10 @@ const passportLocalMongoose = require('passport-local-mongoose');
 //var findOrCreate = require('mongoose-findorcreate')
 
 const userSchema = new Schema({
+    is_active:{
+        type:Boolean,
+        default: true
+    },
     donations:[
         {
             type: Schema.Types.ObjectId,

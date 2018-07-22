@@ -9,6 +9,20 @@ const checkIfAdmin = (req,res,next) => {
 
 //admin
 
+router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
+    User.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    .populate({
+        path: 'projects',
+        populate:{
+            path: 'followers'
+        }
+    })
+    .populate('followingProjects')
+    .populate('contacts')
+    .then(user=>res.status(200).json(user))
+    .catch(err=>next())
+})
+
 router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
     User.find()
     .then(items=>{
