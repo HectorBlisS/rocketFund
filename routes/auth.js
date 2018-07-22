@@ -69,6 +69,7 @@ router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (re
                 }
             })
             .then(u=>res.json({user:u,access_token:genToken(u)}))
+            .catch(e=>next(e))
 })
 
 

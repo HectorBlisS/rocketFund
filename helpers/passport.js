@@ -14,7 +14,7 @@ passport.use(new FacebookTokenStrategy({
     clientID: "1865855136964814",
     clientSecret: "15500619d33f0d0900d44b95a01faced"
   }, function(accessToken, refreshToken, profile, done) {
-    User.findOne({facebookId: profile.id})
+    return User.findOne({facebookId: profile.id})
     .then(user=>{
         if(user) return done(null, user)
         console.log(profile)
@@ -27,7 +27,7 @@ passport.use(new FacebookTokenStrategy({
         return User.create(u)
     })
     .then(user=>{
-        done(null, user)
+        return done(null, user)
     })
     .catch(e=>done(e, null))
   }
