@@ -25,34 +25,7 @@ const canEdit = (req,res,next)=>{
 }
 
 
-//public
-router.get('/', (req,res,next)=>{
-    const query = {status:"PUBLISHED", active:true};
-    let skip = 0;
-    if(req.query.skip) {
-        skip = req.query.skip;
-        skip += 20;
-    }
-    if(req.query.category) query['category'] = req.query.category; 
-    if(req.query.title) query.title = {$regex:req.query.title, $options:'i'};
 
-    Project.find(query).limit(20).skip(skip)
-    .populate('owner')
-    .then(items=>{
-        res.json({items,skip})
-    })
-    .catch(e=>next(e));
-});
-
-router.get('/:id', (req,res,next)=>{
-    const query = {status:"PUBLISHED", active:true};
-    query._id = req.params.id;
-    Project.findOne(query)
-    .then(item=>{
-        res.json(item)
-    })
-    .catch(e=>next(e));
-});
 
 //user crud
 
@@ -98,6 +71,7 @@ router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
     .catch(e=>next(e))
 })
 
+
 // router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
 //     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
 //     .populate('rewards')
@@ -107,6 +81,34 @@ router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
 // })
 
 
+//public
+router.get('/', (req,res,next)=>{
+    const query = {status:"PUBLISHED", active:true};
+    let skip = 0;
+    if(req.query.skip) {
+        skip = req.query.skip;
+        skip += 20;
+    }
+    if(req.query.category) query['category'] = req.query.category; 
+    if(req.query.title) query.title = {$regex:req.query.title, $options:'i'};
+
+    Project.find(query).limit(20).skip(skip)
+    .populate('owner')
+    .then(items=>{
+        res.json({items,skip})
+    })
+    .catch(e=>next(e));
+});
+
+router.get('/:id', (req,res,next)=>{
+    const query = {status:"PUBLISHED", active:true};
+    query._id = req.params.id;
+    Project.findOne(query)
+    .then(item=>{
+        res.json(item)
+    })
+    .catch(e=>next(e));
+});
 
 
 
