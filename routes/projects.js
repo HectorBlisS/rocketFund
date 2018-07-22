@@ -96,7 +96,7 @@ router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
     .catch(err=>next(err))
 })
 
-router.get('/admin', verifyToken, (req,res, next)=>{
+router.get('/admin', (req,res, next)=>{
     Project.find()
     .then(items=>{
         console.log("si?????", items)
