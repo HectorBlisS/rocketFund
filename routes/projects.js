@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Project = require('../models/Project');
+const User = require('../models/User')
 const verifyToken = require('../helpers/jwt').verifyToken;
 
 const checkIfAdmin = (req,res,next) => {
@@ -45,15 +46,12 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
     let item;
     Project.create(req.body)
     .then(item=>{
-       // item=item
-      //  console.log(req.user)
-       // req.user.projects.push(item._id)
-      //  return req.user.save()
-      res.status(201).json(item)
+       item=item
+       return User.findByIdAndUpdate(req.user._id, {$push:{projects:item._id}}, {new:true})
     })
-    // .then(user=>{
-    //     res.status(201).json(item)
-    // })
+    .then(user=>{
+        res.status(201).json(item)
+    })
     .catch(e=>next(e));
 });
 
