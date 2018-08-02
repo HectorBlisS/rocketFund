@@ -46,6 +46,7 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
     let item;
     Project.create(req.body)
     .then(item=>{
+        console.log(item)
        item=item
        return User.findByIdAndUpdate(req.user._id, {$push:{projects:item._id}}, {new:true})
     })
