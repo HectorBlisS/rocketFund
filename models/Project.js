@@ -31,7 +31,7 @@ const projectSchema = new Schema({
     goal: Number,
     collected: Number,
     visits: Number,
-    publishDate: Date,
+    startDate: Date,
     endDate: Date,
     funders:[
         {
