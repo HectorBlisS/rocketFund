@@ -106,6 +106,15 @@ router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
     .catch(e=>next(e))
 })
 
+router.get('/admin/:id', verifyToken, checkIfAdmin, (req,res, next)=>{
+    //const query = {status:"PUBLISHED", active:true};
+    Project.findById(req.params.id)
+    .then(item=>{
+        res.status(200).send(item)
+    })
+    .catch(e=>next(e))
+})
+
 
 router.patch('/admin/:id', verifyToken, checkIfAdmin, (req,res,next)=>{
     Project.findByIdAndUpdate(req.params.id, req.body, {new:true})
