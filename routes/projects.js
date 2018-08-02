@@ -46,6 +46,7 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
     Project.create(req.body)
     .then(item=>{
         item=item
+        console.log(req.user)
         req.user.projects.push(item._id)
         return req.user.save()
     })
