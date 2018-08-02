@@ -50,6 +50,7 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
        return User.findByIdAndUpdate(req.user._id, {$push:{projects:item._id}}, {new:true})
     })
     .then(user=>{
+        console.log(item)
         res.status(201).json(item)
     })
     .catch(e=>next(e));
