@@ -45,14 +45,15 @@ router.post('/own', verifyToken, canPublish, (req,res,next)=>{
     let item;
     Project.create(req.body)
     .then(item=>{
-        item=item
-        console.log(req.user)
-        req.user.projects.push(item._id)
-        return req.user.save()
+       // item=item
+      //  console.log(req.user)
+       // req.user.projects.push(item._id)
+      //  return req.user.save()
+      res.status(201).json(item)
     })
-    .then(user=>{
-        res.status(201).json(item)
-    })
+    // .then(user=>{
+    //     res.status(201).json(item)
+    // })
     .catch(e=>next(e));
 });
 
