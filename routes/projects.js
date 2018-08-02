@@ -109,6 +109,8 @@ router.get('/admin', verifyToken, checkIfAdmin, (req,res, next)=>{
 router.get('/admin/:id', verifyToken, checkIfAdmin, (req,res, next)=>{
     //const query = {status:"PUBLISHED", active:true};
     Project.findById(req.params.id)
+    .populate('owner')
+    .populate('rewards')
     .then(item=>{
         res.status(200).send(item)
     })
