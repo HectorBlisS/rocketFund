@@ -77,9 +77,16 @@ router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
 })
 
 router.delete('/own/:id', verifyToken, canEdit, (req,res,next)=>{
+    let project;
     Project.findByIdAndRemove(req.params.id)
     .then(item=>{
-        res.status(202).json(item)
+        project = item
+        const index = req.user.projects.indexOf(item._id)
+        req.user.projects.splice(index,1)
+        return req.user.save()
+    })
+    .then(user=>{
+        res.status(202).json(project)
     })
     .catch(e=>next(e));
 })
