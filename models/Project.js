@@ -1,6 +1,7 @@
 const Schema = require('mongoose').Schema;
 
 const projectSchema = new Schema({
+    duration: String,
     photo:String,
     video: String,
     owner:{

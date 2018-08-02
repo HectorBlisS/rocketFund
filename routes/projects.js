@@ -41,6 +41,7 @@ router.get('/own/:id', verifyToken, (req,res,next)=>{
 });
 
 router.post('/own', verifyToken, canPublish, (req,res,next)=>{
+    req.body.owner = req.user._id
     Project.create(req.body)
     .then(item=>{
         res.status(201).json(item)
