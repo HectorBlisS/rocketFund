@@ -43,16 +43,16 @@ router.get('/own/:id', verifyToken, (req,res,next)=>{
 
 router.post('/own', verifyToken, canPublish, (req,res,next)=>{
     req.body.owner = req.user._id
-    let item;
+    let project;
     Project.create(req.body)
     .then(item=>{
         console.log(item)
-       item=item
+       project=item
        return User.findByIdAndUpdate(req.user._id, {$push:{projects:item._id}}, {new:true})
     })
     .then(user=>{
-        console.log(item)
-        res.status(201).json(item)
+        console.log(project)
+        res.status(201).json(project)
     })
     .catch(e=>next(e));
 });
