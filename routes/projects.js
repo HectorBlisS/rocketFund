@@ -76,6 +76,14 @@ router.patch('/own/:id', verifyToken, canEdit, (req,res,next)=>{
     .catch(e=>next(e));
 })
 
+router.delete('/own/:id', verifyToken, canEdit, (req,res,next)=>{
+    Project.findByIdAndRemove(req.params.id)
+    .then(item=>{
+        res.status(202).json(item)
+    })
+    .catch(e=>next(e));
+})
+
 //admin crud
 
 
