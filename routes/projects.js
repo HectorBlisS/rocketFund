@@ -30,6 +30,17 @@ const canEdit = (req,res,next)=>{
 
 //user crud
 
+router.get('/own/', verifyToken, (req,res,next)=>{
+    Project.find({owner:req.user._id})
+    .populate('rewards')
+    // .populate('funds')
+    .then(items=>{
+        if(!items) return res.status(403).json({message:"you don't have access"})
+        res.json(items)
+    })
+    .catch(e=>next(e));
+});
+
 router.get('/own/:id', verifyToken, (req,res,next)=>{
     Project.findOne({_id:req.params.id,owner:req.user._id})
     .populate('rewards')
