@@ -41,7 +41,7 @@ passport.use(new GoogleTokenStrategy({
     clientSecret: "rI8lTZHer_f4SGaSc2SjHoto"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log(profile)
+    console.log("google profile: ", profile)
     // return User.findOne({googleId: profile.id}, (err, user)=>{
     //     if(err) return done(err)
     //     if(user) return done(null, user)
