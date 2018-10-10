@@ -45,7 +45,7 @@ passport.use(new GoogleTokenStrategy({
     return User.findOne({googleId: profile.id}, (err, user)=>{
         if(err) return done(err)
         if(user) return done(null, user)
-        console.log(profile)
+//        console.log(profile)
         const u = new User({
             googleId:profile.id,
             username: profile.displayName,
