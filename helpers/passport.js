@@ -42,22 +42,22 @@ passport.use(new GoogleTokenStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     console.log("google profile: ", profile)
-    // return User.findOne({googleId: profile.id}, (err, user)=>{
-    //     if(err) return done(err)
-    //     if(user) return done(null, user)
-    //     console.log(profile)
-    //     // const u = new User({
-    //     //     googleId:profile.id,
-    //     //     username: profile.displayName,
-    //     //     email: profile.emails[0].value,
-    //     //     photoURL: profile.photos[0].value
-    //     // })
-    //     // u.save(err=>{
-    //     //     if(err) return done(err)
-    //     //     done(null, u)
-    //     // })
+    return User.findOne({googleId: profile.id}, (err, user)=>{
+        if(err) return done(err)
+        if(user) return done(null, user)
+        console.log(profile)
+        const u = new User({
+            googleId:profile.id,
+            username: profile.name,
+            email: profile.email,
+            photoURL: profile.picture
+        })
+        u.save(err=>{
+            if(err) return done(err)
+            done(null, u)
+        })
         
-    // }) //find
+    }) //find
   }
 )); //strategy
 
