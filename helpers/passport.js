@@ -11,8 +11,8 @@ const FacebookTokenStrategy = require('passport-facebook-token');
 //social
 //facebook
 passport.use(new FacebookTokenStrategy({
-    clientID: "1865855136964814",
-    clientSecret: "15500619d33f0d0900d44b95a01faced"
+    clientID: "234692480716354",
+    clientSecret: "5dda9ccbf5be4653c55cf9286a7ad30f"
   }, function(accessToken, refreshToken, profile, done) {
     return User.findOne({facebookId: profile.id}, (err, user)=>{
         if(err) return done(err)
