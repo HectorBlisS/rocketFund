@@ -50,7 +50,7 @@ passport.use(new GoogleTokenStrategy({
             googleId:profile.id,
             username: profile.displayName,
             email: profile.emails[0].value,
-            photoURL: profile.picture
+            photoURL: profile._json.picture
         })
         u.save(err=>{
             if(err) return done(err)
