@@ -6,7 +6,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 const FacebookTokenStrategy = require('passport-facebook-token');
-const GoogleTokenStrategy = require('passport-google-token')
+const GoogleTokenStrategy = require('passport-google-token').Strategy
 
 
 //social
