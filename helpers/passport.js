@@ -48,8 +48,8 @@ passport.use(new GoogleTokenStrategy({
         console.log(profile)
         const u = new User({
             googleId:profile.id,
-            username: profile.name,
-            email: profile.email,
+            username: profile.displayName,
+            email: profile.emails[0].value,
             photoURL: profile.picture
         })
         u.save(err=>{
