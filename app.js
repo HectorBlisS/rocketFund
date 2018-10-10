@@ -67,7 +67,7 @@ app.use('/categories', categories);
 app.use('/rewards', rewards);
 app.use('/projects', projects);
 app.use('/users', users);
-app.use('/', auth);
+app.use('/auth', auth);
 app.use('/', index);
 
 
