@@ -40,22 +40,23 @@ passport.use(new GoogleTokenStrategy({
     clientSecret: "rI8lTZHer_f4SGaSc2SjHoto"
   },
   function(accessToken, refreshToken, profile, done) {
-    return User.findOne({googleId: profile.id}, (err, user)=>{
-        if(err) return done(err)
-        if(user) return done(null, user)
-        console.log(profile)
-        // const u = new User({
-        //     googleId:profile.id,
-        //     username: profile.displayName,
-        //     email: profile.emails[0].value,
-        //     photoURL: profile.photos[0].value
-        // })
-        // u.save(err=>{
-        //     if(err) return done(err)
-        //     done(null, u)
-        // })
+    console.log(profile)
+    // return User.findOne({googleId: profile.id}, (err, user)=>{
+    //     if(err) return done(err)
+    //     if(user) return done(null, user)
+    //     console.log(profile)
+    //     // const u = new User({
+    //     //     googleId:profile.id,
+    //     //     username: profile.displayName,
+    //     //     email: profile.emails[0].value,
+    //     //     photoURL: profile.photos[0].value
+    //     // })
+    //     // u.save(err=>{
+    //     //     if(err) return done(err)
+    //     //     done(null, u)
+    //     // })
         
-    }) //find
+    // }) //find
   }
 ));
 
