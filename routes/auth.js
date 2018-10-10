@@ -76,6 +76,23 @@ router.post('/auth/facebook/token', passport.authenticate('facebook-token'), (re
     .catch(e=>next(e))
 })
 
+//google login
+router.post('/auth/google/token', passport.authenticate('google-token'), (req, res, next)=>{
+    if(!req.user.is_active) return res.status(403).send({message:"Tu cuenta ha sido desactivada"})
+    User.findById(req.user._id)
+    .populate({
+        path: 'projects',
+        populate:{                    
+            path: 'followers'
+                }
+    })
+    .then(u=>{
+        console.log('llego? ', u)
+        res.status(200).send({user:u, access_token:genToken(u)})
+    })
+    .catch(e=>next(e))
+})
+
 
 
 router.get('/private', verifyToken, (req,res)=>{

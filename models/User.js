@@ -65,6 +65,10 @@ const userSchema = new Schema({
     facebookId:{
         type: String,
         unique:true
+    },
+    googleId:{
+        type: String,
+        unique:true
     }
 },{
     timestamps:{
