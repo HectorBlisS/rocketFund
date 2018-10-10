@@ -15,6 +15,7 @@ passport.use(new FacebookTokenStrategy({
     clientID: "234692480716354",
     clientSecret: "5dda9ccbf5be4653c55cf9286a7ad30f"
   }, function(accessToken, refreshToken, profile, done) {
+      console.log(profile)
     return User.findOne({facebookId: profile.id}, (err, user)=>{
         if(err) return done(err)
         if(user) return done(null, user)
@@ -58,6 +59,6 @@ passport.use(new GoogleTokenStrategy({
         
     // }) //find
   }
-));
+)); //strategy
 
 module.exports = passport;
