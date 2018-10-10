@@ -64,6 +64,9 @@ const userSchema = new Schema({
     email2: String,
     facebookId:{
         type: String
+    },
+    googleId:{
+        type: String
     }
 
 },{
