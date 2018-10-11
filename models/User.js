@@ -63,10 +63,14 @@ const userSchema = new Schema({
     occupation: String,
     email2: String,
     facebookId:{
-        type: String
+        type: String,
+        sparse:true,
+        unique:true
     },
     googleId:{
-        type: String
+        type: String,
+        sparse:true,
+        unique:true
     }
 
 },{
